@@ -9,7 +9,7 @@ const ELECTRONICS_DEFAULT_PRICE = 180;
 const EULER = 2.7182818284590452354;
 
 function calculate(int $amount, int $defaultPrice) : int {
-    return round(1 + (($defaultPrice - 1) * EULER  ^ (-0.01 * $amount)));
+    return 1 + (($defaultPrice - 1) * pow(EULER, (-0.01 * $amount)));
 }
 
 if (isset($_GET['iron']) && isset($_GET['water']) && isset($_GET['food']) && isset($_GET['steel']) && isset($_GET['electronics'])) {
