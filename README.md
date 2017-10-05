@@ -12,7 +12,8 @@ in dependence of the current available amounts of goods
 To use this service you have to make an HTTP-request with five different GET-parameters  
 where everyone has to be set.  
 The five parameters are: `iron`, `water`, `food`, `steel` and `electronics` and   
-every single one have to be an integer value. 
+every single one have to be an integer value. The value defines how many of the  
+particular good is available in the universe.
 
 The correct request address and port is dependent on where this service is running.  
 
