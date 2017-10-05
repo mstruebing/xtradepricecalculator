@@ -26,18 +26,6 @@ function isValidRequest(array $args) : bool
         isset($args['electronics']) && is_numeric($args['electronics']);
 }
 
-/*
- * Calculates the price of a good
- *
- * @param int $amount - the amount of the good
- * @param int $defaultPrice - the default price for the specific good
- * @return int - the price
- */
-function calculatePrice(int $amount, int $defaultPrice) : int
-{
-    return 1 + (($defaultPrice - 1) * pow(M_E, (-0.01 * $amount)));
-}
-
 /**
  * Calculates adjusted default prices out of different amounts of goods
  *
@@ -56,7 +44,25 @@ function adjustDefaultPrices(
     int $electronicsAmount
 ) : array {
     /* TODO: Find something to make the prices dependent on different amounts */
-    return ['iron' => IRON_DEFAULT_PRICE, 'water' => WATER_DEFAULT_PRICE, 'food' => FOOD_DEFAULT_PRICE, 'steel' => STEEL_DEFAULT_PRICE, 'electronics' => ELECTRONICS_DEFAULT_PRICE];
+    return [
+        'iron' => IRON_DEFAULT_PRICE,
+        'water' => WATER_DEFAULT_PRICE,
+        'food' => FOOD_DEFAULT_PRICE,
+        'steel' => STEEL_DEFAULT_PRICE,
+        'electronics' => ELECTRONICS_DEFAULT_PRICE
+    ];
+}
+
+/*
+ * Calculates the price of a good
+ *
+ * @param int $amount - the amount of the good
+ * @param int $defaultPrice - the default price for the specific good
+ * @return int - the price
+ */
+function calculatePrice(int $amount, int $defaultPrice) : int
+{
+    return 1 + (($defaultPrice - 1) * pow(M_E, (-0.01 * $amount)));
 }
 
 /**
