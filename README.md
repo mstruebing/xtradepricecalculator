@@ -9,14 +9,14 @@ in dependence of the current available amounts of goods
 
 ## Usage 
 
-To use this service you have to make an HTTP-request with five different GET-parameters
-where everyone has to be set.
-The five parameters are: `iron`, `water`, `food`, `steel` and `electronics` and 
-every single one have to be an integer value.
+To use this service you have to make an HTTP-request with five different GET-parameters  
+where everyone has to be set.  
+The five parameters are: `iron`, `water`, `food`, `steel` and `electronics` and   
+every single one have to be an integer value. 
 
-The correct request address and port is dependent on where this service is running.
+The correct request address and port is dependent on where this service is running.  
 
-In case it is running on localhost on port 8000 it could be called like this:
+In case it is running on localhost on port 8000 it could be called like this:  
 
 `curl '127.0.0.1:8000?iron=30&water=5&food=2&steel=50000&electronics=100'`
 
