@@ -43,7 +43,6 @@ function adjustDefaultPrices(
     int $steelAmount,
     int $electronicsAmount
 ) : array {
-    /* TODO: Find something to make the prices dependent on different amounts */
     $defaultPrices =  [
         'iron' => IRON_DEFAULT_PRICE,
         'water' => WATER_DEFAULT_PRICE,
