@@ -1,0 +1,22 @@
+{
+    "name": "it5n/xtradepricecalculator",
+    "authors": [
+        {
+            "name": "Max Strübing",
+            "email": "mxstrbng@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "editorconfig-checker/editorconfig-checker": "^7.0",
+        "squizlabs/php_codesniffer": "^3.1"
+    },
+    "scripts": {
+        "lint": [
+            "@lint:editorconfig",
+            "@lint:psr2"
+        ],
+        "lint:editorconfig": "editorconfig-checker .",
+        "lint:psr2": "phpcs --standard=PSR2 index.php"
+    }
+}
