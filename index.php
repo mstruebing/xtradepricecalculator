@@ -7,7 +7,7 @@ const FOOD_DEFAULT_PRICE = 20;
 const STEEL_DEFAULT_PRICE = 70;
 const ELECTRONICS_DEFAULT_PRICE = 180;
 
-/* Threshold in percent when a good is */
+/* Threshold in percent when a good should get a higher price */
 const THRESHOLD = 20;
 
 /*
@@ -44,13 +44,33 @@ function adjustDefaultPrices(
     int $electronicsAmount
 ) : array {
     /* TODO: Find something to make the prices dependent on different amounts */
-    return [
+    $defaultPrices =  [
         'iron' => IRON_DEFAULT_PRICE,
         'water' => WATER_DEFAULT_PRICE,
         'food' => FOOD_DEFAULT_PRICE,
         'steel' => STEEL_DEFAULT_PRICE,
         'electronics' => ELECTRONICS_DEFAULT_PRICE
     ];
+
+    $amounts = [
+        'iron' => $ironAmount,
+        'water' => $waterAmount,
+        'food' => $foodAmount,
+        'steel' => $steelAmount,
+        'electronics' => $electronicsAmount
+    ];
+
+    $calculatedPrices = [];
+
+    foreach ($amounts as $type => $amount) {
+        if ($amount < max($amounts) / 100 * (100 - THRESHOLD)) {
+            $calculatedPrices[$type] = $defaultPrices[$type] / 100 * (100 + THRESHOLD);
+        } else {
+            $calculatedPrices[$type] = $defaultPrices[$type];
+        }
+    }
+
+    return $calculatedPrices;
 }
 
 /*
