@@ -26,7 +26,7 @@ For Development please make sure that your editor reads the `.editorconfig`.
 Also `composer` should be used to comfortable install and use some code quality tools.
 Currently two different code quality tools are used `editorconfig-checker` to make sure 
 all files are respecting the `.editorconfig` and `PHP_CodeSniffer` to make sure 
-the code implements the PSR2 standard. 
+the code implements the PSR-2 coding standard. 
 Because of the small size of this service we currently violate one rule 
 but this should stay exactly at this number.
 To install these dependencies it is enough to do a simple `composer install`.
@@ -47,3 +47,4 @@ Further information to the mentioned tools:
 [Editorconfig](http://editorconfig.org/)
 [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker.php)
 [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
+[PSR-2 Coding Style](http://www.php-fig.org/psr/psr-2/)

@@ -55,7 +55,8 @@ function adjustDefaultPrices(
     int $steelAmount,
     int $electronicsAmount
 ) : array {
-    return [];
+    /* TODO: Find something to make the prices dependent on different amounts */
+    return ['iron' => IRON_DEFAULT_PRICE, 'water' => WATER_DEFAULT_PRICE, 'food' => FOOD_DEFAULT_PRICE, 'steel' => STEEL_DEFAULT_PRICE, 'electronics' => ELECTRONICS_DEFAULT_PRICE];
 }
 
 /**
