@@ -45,7 +45,7 @@ and the first side effect is on line 106.
 ```
 
 
-Further information to the mentioned tools:
+Further information to the mentioned tools:  
 [Editorconfig](http://editorconfig.org/)  
 [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker.php)  
 [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)  
