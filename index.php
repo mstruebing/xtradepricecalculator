@@ -63,6 +63,8 @@ function adjustDefaultPrices(
     $calculatedPrices = [];
 
     foreach ($amounts as $type => $amount) {
+        /* if the amount is below a certrain threshold of the maximum */
+        /* it gets a higher default price for the remaining calculation */
         if ($amount < max($amounts) / 100 * (100 - THRESHOLD)) {
             $calculatedPrices[$type] = $defaultPrices[$type] / 100 * (100 + THRESHOLD);
         } else {
