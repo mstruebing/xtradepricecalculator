@@ -8,6 +8,7 @@ const STEEL_DEFAULT_PRICE = 70;
 const ELECTRONICS_DEFAULT_PRICE = 180;
 
 /* Threshold in percent when a good should get a higher price */
+/* currently also used to add amount of percent of the default price */
 const THRESHOLD = 20;
 
 /*
