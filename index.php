@@ -11,6 +11,8 @@ const ELECTRONICS_DEFAULT_PRICE = 180;
 /* currently also used to add amount of percent of the default price */
 const THRESHOLD = 20;
 
+const MULTIPLIER = -0.01;
+
 /*
  * Checks if a request contains all needed information for this service
  *
@@ -84,7 +86,7 @@ function adjustDefaultPrices(
  */
 function calculatePrice(int $amount, int $defaultPrice) : int
 {
-    return 1 + (($defaultPrice - 1) * pow(M_E, (-0.01 * $amount)));
+    return 1 + (($defaultPrice - 1) * pow(M_E, (MULTIPLIER * $amount)));
 }
 
 /**
