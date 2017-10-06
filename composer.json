@@ -16,7 +16,6 @@
             "@lint:editorconfig",
             "@lint:psr2"
         ],
-        "start": "php -S 127.0.0.1:3000",
         "lint:editorconfig": "editorconfig-checker .",
         "lint:psr2": "phpcs --standard=PSR2 index.php"
     }

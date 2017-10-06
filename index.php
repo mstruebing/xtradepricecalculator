@@ -11,6 +11,7 @@ const ELECTRONICS_DEFAULT_PRICE = 180;
 /* currently also used to add amount of percent of the default price */
 const THRESHOLD = 20;
 
+/* Multiplier to use for the calculation of the price */
 const MULTIPLIER = -0.01;
 
 /*
