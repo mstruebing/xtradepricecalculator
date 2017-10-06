@@ -92,8 +92,11 @@ function calculatePrice(int $amount, int $defaultPrice) : int
 
 /**
  * Main function
+ *
+ * @param array $args - the request arguments
+ * @return void
  */
-function main() : void
+function main(array $args) : void
 {
     $args = $_GET;
 
@@ -135,4 +138,4 @@ function main() : void
     }
 }
 
-main();
+main($_GET);
