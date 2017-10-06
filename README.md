@@ -23,6 +23,13 @@ In case it is running on localhost on port 8000 it could be called like this:
 
 ## Development
 
+To start a local development server on port 3000 simply use the php build-in server in the root directory:  
+`php -S localhost:3000`
+
+### Quality Assurance
+
+#### Coding Standards
+
 For Development please make sure that your editor reads the `.editorconfig`.  
 Also `composer` should be used to comfortable install and use some code quality tools.  
 Currently two different code quality tools are used `editorconfig-checker` to make sure   
@@ -34,9 +41,6 @@ To install these dependencies it is enough to do a simple `composer install`.
 To invoke the both tools you could just type `composer lint` int your terminal.  
 To invoke just one you could either type `composer lint:editorconfig` or `composer lint:psr2`.  
 
-To start a local development server on port 3000 simply use the php build-in server in the root directory:  
-`php -S localhost:3000`
-
 The mentioned error which is expected is this:
 
 ```
@@ -47,6 +51,12 @@ not do both. The first symbol is defined on line 19
 and the first side effect is on line 106.
 ```
 
+#### Testing
+
+There is a small bash script `test.sh` which executes some small automated tests.  
+It uses the build-in PHP-server and makes some requests with `curl` to the service  
+and checks the response. Please make sure the tests are working before deploying or  
+merging/pushing into master.
 
 Further information to the mentioned tools:  
 [Editorconfig](http://editorconfig.org/)  
