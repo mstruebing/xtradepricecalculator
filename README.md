@@ -34,6 +34,8 @@ To install these dependencies it is enough to do a simple `composer install`.
 To invoke the both tools you could just type `composer lint` int your terminal.  
 To invoke just one you could either type `composer lint:editorconfig` or `composer lint:psr2`.  
 
+A local PHP development server can be started via `composer start` and will run on port 3000.
+
 The mentioned error which is expected is this:
 
 ```
