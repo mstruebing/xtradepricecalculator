@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /* Default prices of different goods */
 const IRON_DEFAULT_PRICE = 15;
@@ -8,7 +9,7 @@ const STEEL_DEFAULT_PRICE = 70;
 const ELECTRONICS_DEFAULT_PRICE = 180;
 
 /* Threshold in percent when a good should get a higher price */
-/* currently also used to add amount of percent of the default price */
+/* currently also used to add amount of percent to the default price */
 const THRESHOLD = 20;
 
 /* Multiplier to use for the calculation of the price */
