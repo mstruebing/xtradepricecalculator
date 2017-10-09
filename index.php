@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 /* Default prices of different goods */
 const IRON_DEFAULT_PRICE = 15;
