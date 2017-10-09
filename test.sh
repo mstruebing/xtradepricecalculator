@@ -48,14 +48,26 @@ else
     printPassed
 fi
 
-echo "Should return no error if the request is valid"
-retValue=$(curl -s 'localhost:3000?iron=30&water=5&food=2&steel=50000&electronics=2000' | grep 'ERROR:') > /dev/null
-if [[ ! -z $retValue ]]; then
+echo "Should return an error if a parameter is a string instead of an integer"
+retValue=$(curl -s 'localhost:3000?iron=30&water=5&food=2&steel=50000&electronics="2000"' | grep 'ERROR:') > /dev/null
+if [[ -z $retValue ]]; then
     printFail
     exitValue=1
 else
     printPassed
 fi
 
+echo "Should return no error if the request is valid"
+retValue=$(curl -s 'localhost:3000?iron=30&water=5&food=2&steel=50000&electronics=2000' | grep 'ERROR:') > /dev/null
+if [[ -n $retValue ]]; then
+    printFail
+    exitValue=1
+else
+    printPassed
+fi
+
+# kills the started PHP-server
+# CAUTION this kills ALL running PHP-server
 killall php
+
 exit $exitValue
