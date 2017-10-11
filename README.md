@@ -14,6 +14,7 @@ where everyone has to be set.
 The five parameters are: `iron`, `water`, `food`, `steel` and `electronics` and   
 every single one have to be an integer value. The value defines how many of the  
 particular good is available in the universe.
+The request have to be a GET request, all other requests will send a 501(not implement) response.
 
 The correct request address and port is dependent on where this service is running.  
 
