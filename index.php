@@ -1,5 +1,10 @@
 <?php
 
+/* Used HTTP status codes */
+const HTTP_NOT_IMPLEMENTED = 501;
+const HTTP_BAD_REQUEST = 400;
+const HTTP_OK = 200;
+
 /* Default prices of different goods */
 const IRON_DEFAULT_PRICE = 15;
 const WATER_DEFAULT_PRICE = 20;
@@ -98,6 +103,14 @@ function calculatePrice(int $amount, int $defaultPrice) : int
  */
 function main(array $args) : void
 {
+
+    /* Request have to be a GET request */
+    if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+        http_response_code(HTTP_NOT_IMPLEMENTED);
+        printf("ERROR: Wrong request method, use GET\n");
+        return;
+    }
+
     $args = $_GET;
 
     if (isValidRequest($args)) {
@@ -115,6 +128,8 @@ function main(array $args) : void
             !isset($defaultPrices['steel']) &&
             !isset($defaultPrices['electronics'])) {
             printf("ERROR: Something went wrong code wise\n");
+            http_response_code(HTTP_BAD_REQUEST);
+            return;
         }
 
         $ironPrice = calculatePrice($ironAmount, $defaultPrices['iron']);
@@ -135,7 +150,11 @@ function main(array $args) : void
         printf(
             "ERROR: You have to call this service with iron, water, food, steel and electronics as numeric values\n"
         );
+        http_response_code(HTTP_BAD_REQUEST);
+        return;
     }
+
+    http_response_code(HTTP_OK);
 }
 
 main($_GET);

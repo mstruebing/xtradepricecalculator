@@ -57,6 +57,33 @@ else
     printPassed
 fi
 
+echo "Should return an error if the wrong request method is used (POST)"
+retValue=$(curl -s --data "iron=30&water=5&food=2&steel=50000&electronics=2000" 'localhost:3000' | grep 'ERROR:') > /dev/null
+if [[ -z $retValue ]]; then
+    printFail
+    exitValue=1
+else
+    printPassed
+fi
+
+echo "Should return an error if the wrong request method is used (PUT)"
+retValue=$(curl -X PUT -s --data "iron=30&water=5&food=2&steel=50000&electronics=2000" 'localhost:3000' | grep 'ERROR:') > /dev/null
+if [[ -z $retValue ]]; then
+    printFail
+    exitValue=1
+else
+    printPassed
+fi
+
+echo "Should return an error if the wrong request method is used (DELETE)"
+retValue=$(curl -X DELETE -s --data "iron=30&water=5&food=2&steel=50000&electronics=2000" 'localhost:3000' | grep 'ERROR:') > /dev/null
+if [[ -z $retValue ]]; then
+    printFail
+    exitValue=1
+else
+    printPassed
+fi
+
 echo "Should return no error if the request is valid"
 retValue=$(curl -s 'localhost:3000?iron=30&water=5&food=2&steel=50000&electronics=2000' | grep 'ERROR:') > /dev/null
 if [[ -n $retValue ]]; then
