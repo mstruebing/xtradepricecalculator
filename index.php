@@ -12,7 +12,7 @@ const ERR_BAD_REQUEST = 'You have to call this service with iron, water, food, s
 const ERR_INTERNAL_SERVER_ERROR = 'Something went wrong code wise';
 
 /* Default prices of different goods */
-const DEFAULT_PRICE_IRCON = 15;
+const DEFAULT_PRICE_IRON = 15;
 const DEFAULT_PRICE_WATER = 20;
 const DEFAULT_PRICE_FOOD = 20;
 const DEFAULT_PRICE_STEEL = 70;
@@ -26,7 +26,7 @@ const AMOUNT_DIFFERENCE_THRESHOLD = 20;
 const PRICE_DIFFERENCE_MULTIPLIER = 20;
 
 /* Multiplier to use for the calculation of the price */
-const MULTIPLIER = -0.01;
+const CALCULATION_MULTIPLIER = -0.01;
 
 /**
  * Prints an error message
@@ -125,7 +125,7 @@ function adjustDefaultPrices(
  */
 function calculatePrice(int $amount, int $defaultPrice) : int
 {
-    return 1 + (($defaultPrice - 1) * pow(M_E, (MULTIPLIER * $amount)));
+    return 1 + (($defaultPrice - 1) * pow(M_E, (CALCULATION_MULTIPLIER * $amount)));
 }
 
 /**
@@ -170,7 +170,7 @@ function main(array $args) : void
         $electronicsPrice = calculatePrice($electronicsAmount, $defaultPrices['electronics']);
 
         printf(
-            "iron: %s, water; %s, food: %s, steel: %s, electronics: %s\n",
+            "\"iron\": %s, \"water\": %s, \"food\": %s, \"steel\": %s, \"electronics\": %s\n",
             $ironPrice,
             $waterPrice,
             $foodPrice,
