@@ -46,7 +46,8 @@ function printError(string $errorMsg)
  * @param string $errorMsg - the error message to print
  * @return void
  */
-function error(int $httpStatusCode, string $errorMsg) {
+function error(int $httpStatusCode, string $errorMsg)
+{
     http_response_code($httpStatusCode);
     printError($errorMsg);
 }
