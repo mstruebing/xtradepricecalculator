@@ -19,7 +19,7 @@ const THRESHOLD = 20;
 /* Multiplier to use for the calculation of the price */
 const MULTIPLIER = -0.01;
 
-/*
+/**
  * Checks if a request contains all needed information for this service
  *
  * @param array $args - the $_GET variables
@@ -83,7 +83,7 @@ function adjustDefaultPrices(
     return $calculatedPrices;
 }
 
-/*
+/**
  * Calculates the price of a good
  *
  * @param int $amount - the amount of the good

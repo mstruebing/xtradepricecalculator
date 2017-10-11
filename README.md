@@ -24,7 +24,7 @@ In case it is running on localhost on port 8000 it could be called like this:
 
 ## Development
 
-To start a local development server on port 3000 simply use the php build-in server in the root directory:  
+To start a local development server on port 3000 simply use the PHP build-in server in the root directory:  
 `php -S localhost:3000`
 
 ### Quality Assurance
