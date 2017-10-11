@@ -12,15 +12,18 @@ const ERR_BAD_REQUEST = 'You have to call this service with iron, water, food, s
 const ERR_INTERNAL_SERVER_ERROR = 'Something went wrong code wise';
 
 /* Default prices of different goods */
-const IRON_DEFAULT_PRICE = 15;
-const WATER_DEFAULT_PRICE = 20;
-const FOOD_DEFAULT_PRICE = 20;
-const STEEL_DEFAULT_PRICE = 70;
-const ELECTRONICS_DEFAULT_PRICE = 180;
+const DEFAULT_PRICE_IRCON = 15;
+const DEFAULT_PRICE_WATER = 20;
+const DEFAULT_PRICE_FOOD = 20;
+const DEFAULT_PRICE_STEEL = 70;
+const DEFAULT_PRICE_ELECTRONICS = 180;
 
 /* Threshold in percent when a good should get a higher price */
-/* currently also used to add amount of percent to the default price */
-const THRESHOLD = 20;
+const AMOUNT_DIFFERENCE_THRESHOLD = 20;
+
+/* Amount in percent which is a added to the default price */
+/* of a good if the AMOUNT_DIFFERENCE_THRESHOLD is hit */
+const PRICE_DIFFERENCE_MULTIPLIER = 20;
 
 /* Multiplier to use for the calculation of the price */
 const MULTIPLIER = -0.01;
@@ -28,12 +31,24 @@ const MULTIPLIER = -0.01;
 /**
  * Prints an error message
  *
- * @param string $error
+ * @param string $errorMsg - the error message to print
  * @return void
  */
-function printError(string $error)
+function printError(string $errorMsg)
 {
-    printf("ERROR: %s\n", $error);
+    printf("ERROR: %s\n", $errorMsg);
+}
+
+/**
+ * Sets the HTTP response code and prints an error message
+ *
+ * @param int $httpStatusCode - the http status code to set
+ * @param string $errorMsg - the error message to print
+ * @return void
+ */
+function error(int $httpStatusCode, string $errorMsg) {
+    http_response_code($httpStatusCode);
+    printError($errorMsg);
 }
 
 /**
@@ -70,11 +85,11 @@ function adjustDefaultPrices(
     int $electronicsAmount
 ) : array {
     $defaultPrices =  [
-        'iron' => IRON_DEFAULT_PRICE,
-        'water' => WATER_DEFAULT_PRICE,
-        'food' => FOOD_DEFAULT_PRICE,
-        'steel' => STEEL_DEFAULT_PRICE,
-        'electronics' => ELECTRONICS_DEFAULT_PRICE
+        'iron' => DEFAULT_PRICE_IRON,
+        'water' => DEFAULT_PRICE_WATER,
+        'food' => DEFAULT_PRICE_FOOD,
+        'steel' => DEFAULT_PRICE_STEEL,
+        'electronics' => DEFAULT_PRICE_ELECTRONICS
     ];
 
     $amounts = [
@@ -90,8 +105,8 @@ function adjustDefaultPrices(
     foreach ($amounts as $type => $amount) {
         /* if the amount is below a certrain threshold of the maximum */
         /* it gets a higher default price for the remaining calculation */
-        if ($amount < max($amounts) / 100 * (100 - THRESHOLD)) {
-            $calculatedPrices[$type] = $defaultPrices[$type] / 100 * (100 + THRESHOLD);
+        if ($amount < max($amounts) / 100 * (100 - AMOUNT_DIFFERENCE_THRESHOLD)) {
+            $calculatedPrices[$type] = $defaultPrices[$type] / 100 * (100 + PRICE_DIFFERENCE_MULTIPLIER);
         } else {
             $calculatedPrices[$type] = $defaultPrices[$type];
         }
@@ -123,8 +138,7 @@ function main(array $args) : void
 
     /* Request have to be a GET request */
     if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-        http_response_code(HTTP_NOT_IMPLEMENTED);
-        printError(ERR_NOT_IMPLEMENTED);
+        error(HTTP_NOT_IMPLEMENTED, ERR_NOT_IMPLEMENTED);
         return;
     }
 
@@ -144,8 +158,7 @@ function main(array $args) : void
             !isset($defaultPrices['food']) &&
             !isset($defaultPrices['steel']) &&
             !isset($defaultPrices['electronics'])) {
-            printError(ERR_INTERNAL_SERVER_ERROR);
-            http_response_code(HTTP_INTERNAL_SERVER_ERROR);
+            error(HTTP_INTERNAL_SERVER_ERROR, ERR_INTERNAL_SERVER_ERROR);
             return;
         }
 
@@ -164,8 +177,7 @@ function main(array $args) : void
             $electronicsPrice
         );
     } else {
-        printError(ERR_BAD_REQUEST);
-        http_response_code(HTTP_BAD_REQUEST);
+        error(HTTP_BAD_REQUEST, ERR_BAD_REQUEST);
         return;
     }
 
