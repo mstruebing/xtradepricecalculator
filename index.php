@@ -1,9 +1,15 @@
 <?php
 
 /* Used HTTP status codes */
-const HTTP_NOT_IMPLEMENTED = 501;
-const HTTP_BAD_REQUEST = 400;
 const HTTP_OK = 200;
+const HTTP_BAD_REQUEST = 400;
+const HTTP_INTERNAL_SERVER_ERROR = 500;
+const HTTP_NOT_IMPLEMENTED = 501;
+
+/* Error messages */
+const ERR_NOT_IMPLEMENTED = 'Wrong request method, use GET';
+const ERR_BAD_REQUEST = 'You have to call this service with iron, water, food, steel and electronics as numeric values';
+const ERR_INTERNAL_SERVER_ERROR = 'Something went wrong code wise';
 
 /* Default prices of different goods */
 const IRON_DEFAULT_PRICE = 15;
@@ -18,6 +24,17 @@ const THRESHOLD = 20;
 
 /* Multiplier to use for the calculation of the price */
 const MULTIPLIER = -0.01;
+
+/**
+ * Prints an error message
+ *
+ * @param string $error
+ * @return void
+ */
+function printError(string $error)
+{
+    printf("ERROR: %s\n", $error);
+}
 
 /**
  * Checks if a request contains all needed information for this service
@@ -107,7 +124,7 @@ function main(array $args) : void
     /* Request have to be a GET request */
     if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         http_response_code(HTTP_NOT_IMPLEMENTED);
-        printf("ERROR: Wrong request method, use GET\n");
+        printError(ERR_NOT_IMPLEMENTED);
         return;
     }
 
@@ -127,8 +144,8 @@ function main(array $args) : void
             !isset($defaultPrices['food']) &&
             !isset($defaultPrices['steel']) &&
             !isset($defaultPrices['electronics'])) {
-            printf("ERROR: Something went wrong code wise\n");
-            http_response_code(HTTP_BAD_REQUEST);
+            printError(ERR_INTERNAL_SERVER_ERROR);
+            http_response_code(HTTP_INTERNAL_SERVER_ERROR);
             return;
         }
 
@@ -147,9 +164,7 @@ function main(array $args) : void
             $electronicsPrice
         );
     } else {
-        printf(
-            "ERROR: You have to call this service with iron, water, food, steel and electronics as numeric values\n"
-        );
+        printError(ERR_BAD_REQUEST);
         http_response_code(HTTP_BAD_REQUEST);
         return;
     }
